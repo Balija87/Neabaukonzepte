@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
 const contactEmail = 'info@neabaukonzepte.de'
+const maxMessagesPerBrowser = 2
+const lockDurationMs = 24 * 60 * 60 * 1000
 
 const copy = {
   de: { tagline: 'Schnelle Verbindung, sichere Installation', category: 'Glasfaser · Bau · Netzwerk', heading: 'Erdarbeiten und Glasfaserinstallationen aus einer Hand', description: 'Wir realisieren optische Netze, sichere Anschlussarbeiten und zuverlässige Lösungen für Wohn- und Geschäftskunden.', primaryAction: 'Angebot anfordern', servicesLabel: 'Leistungen', servicesTitle: 'Unsere Kernkompetenzen', services: [['⚡', 'Trassenarbeiten', 'Präziser Tiefbau und sichere Vorbereitung der Kabeltrasse.'], ['⌁', 'Glasfaserverlegung', 'Professionelle Verlegung von Glasfaserkabeln für stabile Anschlüsse.'], ['⚙', 'Anschlusstechnik', 'Fachgerechte Montage von Anschlusskästen und Übergabestellen.']], aboutLabel: 'Über uns', aboutTitle: 'Erfahrung, Qualität und ein sicherer Anschluss', aboutText: 'Unser Team verbindet Bauexpertise mit modernen Telekommunikationsstandards – für eine zuverlässige Verbindung vom ersten Spatenstich bis zur Übergabe.', benefits: ['Präziser Tiefbau und Trassenplanung', 'Glasfaserverlegung nach modernem Standard', 'Abnahme und Endprüfung vor Übergabe'], contactLabel: 'Kontakt', contactTitle: 'Kostenlose Beurteilung vereinbaren', contactText: 'Kontaktieren Sie uns für Ihre nächste Glasfaserinstallation.', name: 'Ihr Name', email: 'Ihre E-Mail-Adresse', message: 'Kurze Beschreibung der Arbeiten', submit: 'Nachricht senden', sending: 'Wird gesendet…', sent: 'Anfrage wurde an den Versanddienst übermittelt. Bitte prüfen Sie das Postfach.', footer: '© 2026 NEA Baukonzepte GmbH. Alle Rechte vorbehalten.' },
@@ -13,13 +15,35 @@ export default function App() {
   const [sendError, setSendError] = useState('')
   const [isSending, setIsSending] = useState(false)
   const [sent, setSent] = useState(false)
-  const text = copy[language]
+  const [sentCount, setSentCount] = useState(() => Number(window.localStorage.getItem('nea-contact-daily-message-count')) || 0)
+  const [lockExpiresAt, setLockExpiresAt] = useState(() => Number(window.localStorage.getItem('nea-contact-lock-expires-at')) || 0)
+  const baseText = copy[language]
+  const text = {
+    ...baseText,
+    sent: sentCount === 1
+      ? (language === 'de' ? 'Ihre Nachricht wurde gesendet. Sie können heute noch eine Nachricht senden.' : 'Poruka je poslana. Danas možete poslati još jednu poruku.')
+      : sentCount >= maxMessagesPerBrowser
+        ? (language === 'de' ? 'Ihre Nachricht wurde gesendet. Neue Nachrichten sind in 24 Stunden wieder möglich.' : 'Poruka je poslana. Naredne poruke možete poslati ponovo za 24 sata.')
+        : baseText.sent,
+  }
 
   useEffect(() => { document.documentElement.dataset.theme = theme }, [theme])
+  useEffect(() => {
+    if (lockExpiresAt && lockExpiresAt <= Date.now()) {
+      window.localStorage.removeItem('nea-contact-lock-expires-at')
+      window.localStorage.removeItem('nea-contact-daily-message-count')
+      setLockExpiresAt(0)
+      setSentCount(0)
+    }
+  }, [lockExpiresAt])
 
   async function sendMail(event) {
     event.preventDefault()
     if (isSending) return
+    if (lockExpiresAt > Date.now()) {
+      setSendError(language === 'de' ? 'Neue Nachrichten sind erst 24 Stunden nach der zweiten Nachricht möglich.' : 'Nove poruke su moguće tek 24 sata nakon druge poruke.')
+      return
+    }
     const form = event.currentTarget
     setSendError('')
     setSent(false)
@@ -31,6 +55,14 @@ export default function App() {
       if (!response.ok || result.success === false) throw new Error(result.message || 'Delivery failed')
       form.reset()
       setSent(true)
+      const nextCount = sentCount + 1
+      window.localStorage.setItem('nea-contact-daily-message-count', String(nextCount))
+      setSentCount(nextCount)
+      if (nextCount === maxMessagesPerBrowser) {
+        const expires = Date.now() + lockDurationMs
+        window.localStorage.setItem('nea-contact-lock-expires-at', String(expires))
+        setLockExpiresAt(expires)
+      }
     } catch (error) {
       const detail = error instanceof Error && error.message ? ` (${error.message})` : ''
       setSendError((language === 'de' ? 'Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.' : 'Poruka nije poslana. Pokušajte ponovo ili nam pišite direktno e-mailom.') + detail)
