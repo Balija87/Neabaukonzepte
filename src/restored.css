@@ -27,6 +27,17 @@ button, input, textarea { font: inherit; }
 :root[data-theme='light'] { color: #17212e; background: #f5f8fc; }
 :root[data-theme='light'] .site-shell { background: linear-gradient(#edf5ff, #f8fbff 40%, #eef3f9); }
 
+:root[data-theme='light'] .card {
+  color: #1e3448;
+  background: rgba(255, 255, 255, 0.92);
+  border-color: #d6e3ee;
+  box-shadow: 0 12px 28px rgba(43, 83, 119, 0.1);
+}
+
+:root[data-theme='light'] .card h3 { color: #13283a; }
+:root[data-theme='light'] .card a { color: #a64f17; font-weight: 700; }
+:root[data-theme='light'] .hero-description { color: #40576b; }
+
 /* Centriranje kontejnera koristeći margin-inline: auto i min funkciju */
 .container {
   width: min(100% - 32px, 1120px);
@@ -160,17 +171,14 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; margin: 0; }
 }
 
 .hero-image {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   max-height: 400px;
   margin-top: 40px;
   border-radius: 24px;
   border: 1px solid rgba(190, 218, 246, 0.2);
-  background: linear-gradient(rgba(5, 15, 29, 0.2), rgba(5, 15, 29, 0.2)), url('/fiberOptic.jpg') center / cover;
-}
-
-:root[data-theme='light'] .hero-image {
-  background-image: linear-gradient(rgba(237, 245, 255, 0.1), rgba(237, 245, 255, 0.1)), url('/Fiber Optic white.jpg');
+  object-fit: cover;
 }
 
 .main-content {
@@ -326,6 +334,9 @@ footer {
   font-size: 0.85rem;
   border-top: 1px solid rgba(166, 204, 239, 0.1);
 }
+
+footer p { margin: 0.35rem 0; }
+footer a { color: inherit; }
 
 @media (max-width: 768px) {
   .container { width: min(100% - 28px, 1120px); }
