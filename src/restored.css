@@ -277,6 +277,20 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; margin: 0; }
   border-color: #f0a154;
 }
 
+:root[data-theme='light'] .contact-form input,
+:root[data-theme='light'] .contact-form textarea {
+  background: #ffffff;
+  border-color: #b5c8db;
+  color: #17212e;
+  caret-color: #17212e;
+}
+
+:root[data-theme='light'] .contact-form input::placeholder,
+:root[data-theme='light'] .contact-form textarea::placeholder {
+  color: #61758a;
+  opacity: 1;
+}
+
 .form-error { margin: 0; color: #ffb464; font-size: 0.88rem; line-height: 1.5; text-align: center; }
 
 .form-locked {
