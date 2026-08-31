@@ -65,11 +65,15 @@ const privacy = {
   section3Title: '3. Zweck der Verarbeitung',
   section3Text: 'Die Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage, zur Kommunikation mit Ihnen und zur Sicherstellung der Funktionalität der Website verarbeitet.',
   section4Title: '4. Cookies und lokale Speicherung',
-  section4Text: 'Diese Website verwendet technisch notwendige Cookies und lokale Speicherfunktionen, um die Darstellung, die Spracheinstellungen und die Funktionalität des Kontaktformulars zu gewährleisten. Es werden keine Werbe- oder Tracking-Cookies verwendet.',
+  section4Text: 'Diese Website verwendet technisch notwendige Cookies und lokale Speicherfunktionen, um die Darstellung, die Spracheinstellungen und die Funktionalität des Kontaktformulars zu gewährleisten. Externe Tracking-Tools oder Werbe-Cookies werden nur nach Ihrer ausdrücklichen Einwilligung aktiviert.',
   section5Title: '5. Weitergabe an Dritte',
   section5Text: 'Ihre Daten werden nicht an Dritte verkauft oder zu Werbezwecken weitergegeben. Eine Weitergabe erfolgt nur, wenn dies zur Erfüllung gesetzlicher Pflichten oder zur Bearbeitung Ihrer Anfrage erforderlich ist.',
   section6Title: '6. Ihre Rechte',
   section6Text: 'Sie haben das Recht, Auskunft über die von uns gespeicherten personenbezogenen Daten zu verlangen, diese zu berichtigen oder zu löschen. Bitte wenden Sie sich hierzu per E-Mail an info@neabaukonzepte.de.',
+  section7Title: '7. Hosting und Serverlogfiles',
+  section7Text: 'Der Webhosting-Provider verarbeitet technische Zugriffsdaten (z. B. IP-Adresse, Zeitstempel, angeforderte Seiten) zur Sicherstellung der Betriebsfähigkeit und Sicherheit der Website. Die genaue Bezeichnung des Hosting-Anbieters und die vertraglichen Details zur Auftragsverarbeitung sind an dieser Stelle zu ergänzen und sollten nach Abschluss des AVV-Vertrags mit dem Host eingepflegt werden.',
+  section8Title: '8. Auftragsverarbeitung (AVV)',
+  section8Text: 'Wenn ein externer Hosting-Anbieter oder Dienstleister personenbezogene Daten im Auftrag der verantwortlichen Stelle verarbeitet, ist ein schriftlicher Vertrag zur Auftragsverarbeitung (AVV) abzuschließen. In diesem Vertrag sind Umfang, Zweck, Dauer, Sicherheitsmaßnahmen und die Pflichten des Auftragnehmers zu regeln. Bitte ergänzen Sie hier die Angaben zu Anbieter, Vertragsdatum und Ansprechpartner des AVV-Vertrags.',
   closing: 'Stand: 2026'
 }
 
@@ -82,6 +86,7 @@ export default function RestoredApp() {
   const [lockExpiresAt, setLockExpiresAt] = useState(0)
   const [now, setNow] = useState(Date.now())
   const text = copy[language]
+  const analyticsAllowed = cookieConsent === 'all'
 
   useEffect(() => { document.documentElement.dataset.theme = theme }, [theme])
   useEffect(() => {
@@ -89,6 +94,8 @@ export default function RestoredApp() {
       localStorage.setItem('nea-cookie-consent', cookieConsent)
     }
   }, [cookieConsent])
+  // GDPR-safe pattern: load any external analytics or embed scripts only when the user has consented.
+  // Example: if (analyticsAllowed) { loadScript('https://www.googletagmanager.com/gtag/js?id=...'); }
   useEffect(() => {
     setLockExpiresAt(Number(localStorage.getItem('nea-contact-lock-expires-at')) || 0)
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
@@ -159,6 +166,8 @@ export default function RestoredApp() {
           <div className="legal-note"><h2>{privacy.section4Title}</h2><p>{privacy.section4Text}</p></div>
           <div className="legal-note"><h2>{privacy.section5Title}</h2><p>{privacy.section5Text}</p></div>
           <div className="legal-note"><h2>{privacy.section6Title}</h2><p>{privacy.section6Text}</p></div>
+          <div className="legal-note"><h2>{privacy.section7Title}</h2><p>{privacy.section7Text}</p></div>
+          <div className="legal-note"><h2>{privacy.section8Title}</h2><p>{privacy.section8Text}</p></div>
           <p className="privacy-date">{privacy.closing}</p>
         </main>
       </div>

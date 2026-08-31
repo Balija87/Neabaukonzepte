@@ -1,4 +1,13 @@
-﻿:root {
+﻿/* Local-first font setup:
+   Drop the actual .woff2 files into public/fonts/ and enable the @font-face rules below.
+   This avoids any external Google Fonts request while keeping a hostable DM Sans stack. */
+@font-face {
+  font-family: 'DM Sans';
+  src: local('DM Sans'), local('DMSans'), local('Segoe UI'), local('Helvetica Neue'), Arial, sans-serif;
+  font-display: swap;
+}
+
+:root {
   color: #eaf3ff;
   background: #07111f;
   font-family: 'DM Sans', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
