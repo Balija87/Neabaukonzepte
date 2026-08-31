@@ -61,15 +61,15 @@ const privacy = {
   section1Title: '1. Verantwortlicher',
   section1Text: 'Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist NEA Baukonzepte GmbH, Waldstr. 168, 63071 Offenbach am Main, E-Mail: info@neabaukonzepte.de.',
   section2Title: '2. Erhobene Daten',
-  section2Text: 'Wenn Sie uns über das Kontaktformular oder per E-Mail kontaktieren, verarbeiten wir Ihre Angaben wie Name, E-Mail-Adresse und Projektbeschreibung. Zusätzlich können technisch notwendige Informationen im Browser lokal gespeichert werden.',
+  section2Text: 'Wenn Sie uns über das Kontaktformular oder per E-Mail kontaktieren, verarbeiten wir Ihre Angaben wie Name, E-Mail-Adresse und Projektbeschreibung. Zusätzlich können technisch notwendige Informationen im Browser lokal gespeichert werden, etwa zur Erinnerung an das gewählte Design oder zur Sicherstellung der Formularfunktion.',
   section3Title: '3. Zweck der Verarbeitung',
-  section3Text: 'Die Daten werden zur Bearbeitung Ihrer Anfrage, zur Kommunikation mit Ihnen und zur Sicherstellung der Funktionalität der Website verwendet.',
+  section3Text: 'Die Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage, zur Kommunikation mit Ihnen und zur Sicherstellung der Funktionalität der Website verarbeitet.',
   section4Title: '4. Cookies und lokale Speicherung',
-  section4Text: 'Diese Website nutzt technisch notwendige Cookies und lokale Speicherung, um etwa das gewählte Design oder die Formularfunktion korrekt zu erhalten. Es werden keine Werbecookies verwendet.',
+  section4Text: 'Diese Website verwendet technisch notwendige Cookies und lokale Speicherfunktionen, um die Darstellung, die Spracheinstellungen und die Funktionalität des Kontaktformulars zu gewährleisten. Es werden keine Werbe- oder Tracking-Cookies verwendet.',
   section5Title: '5. Weitergabe an Dritte',
-  section5Text: 'Ihre Daten werden nicht an Dritte verkauft. Eine Weitergabe erfolgt nur, wenn dies zur Erfüllung rechtlicher Pflichten oder zur Bearbeitung Ihrer Anfrage erforderlich ist.',
+  section5Text: 'Ihre Daten werden nicht an Dritte verkauft oder zu Werbezwecken weitergegeben. Eine Weitergabe erfolgt nur, wenn dies zur Erfüllung gesetzlicher Pflichten oder zur Bearbeitung Ihrer Anfrage erforderlich ist.',
   section6Title: '6. Ihre Rechte',
-  section6Text: 'Sie haben das Recht, Auskunft, Berichtigung oder Löschung Ihrer personenbezogenen Daten zu verlangen. Bitte senden Sie hierzu eine Anfrage an info@neabaukonzepte.de.',
+  section6Text: 'Sie haben das Recht, Auskunft über die von uns gespeicherten personenbezogenen Daten zu verlangen, diese zu berichtigen oder zu löschen. Bitte wenden Sie sich hierzu per E-Mail an info@neabaukonzepte.de.',
   closing: 'Stand: 2026'
 }
 
