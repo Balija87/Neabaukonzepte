@@ -1,0 +1,8 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#07111F"/>
+  <rect x="86" y="86" width="246" height="246" rx="52" fill="#0E233D"/>
+  <path d="M138 272V162H204.3C238.5 162 261 179.3 261 209.8C261 236.9 241.7 252.5 207.4 252.5H169.6V272H138ZM169.6 230.1H203.2C220.8 230.1 231.3 223.7 231.3 210.1C231.3 196.2 220.1 189.4 202.8 189.4H169.6V230.1Z" fill="#F0A154"/>
+  <path d="M298 162H334.1L405.6 281.3H406.4L399.6 162H436.1V332H398.6L328.5 210.8H328.1L335.6 332H298V162Z" fill="#F5F8FC"/>
+  <text x="90" y="455" fill="#F5F8FC" font-family="Arial, sans-serif" font-size="62" font-weight="700">NEA Baukonzepte</text>
+  <text x="90" y="525" fill="#F0A154" font-family="Arial, sans-serif" font-size="30" font-weight="600">Glasfaserbau · Tiefbau · Hausanschlüsse</text>
+</svg>
